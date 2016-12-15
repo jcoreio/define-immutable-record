@@ -1,4 +1,25 @@
 // @flow
 
+export type Record<T: Object> = T & {
+  get: <A>(key: $Keys<T>) => A,
+  set: <A>(key: $Keys<T>, value: A) => Record<T>,
+  hasIn: (keys: Array<any>) => boolean,
+  update: <A>(key: $Keys<T>, updater: (value: A) => A) => Record<T>,
+  updateIn: <A>(path: Array<any>, updater: (value: A) => A) => Record<T>,
+  merge: (values: $Shape<T>) => Record<T>,
+  withMutations: (mutator: (mutable: Record<T>) => any) => Record<T>,
+  inspect: () => string,
+  toObject: () => Object & T,
+  // add more as needed
+}
 
-declare module.exports: {};
+/**
+ * Define an immutable record intended for holding reducer state
+ * @param  spec - the keys and their default values
+ * @return a state record factory function
+ */
+declare export function defineRecord<T>(
+  name: string,
+  spec: T
+): <T>(init?: ?$Shape<T>) => Record<T>
+
