@@ -18,7 +18,7 @@ type UserShape = {
 
 export type User = Record<UserShape>
 
-const UserRecord: (init?: $Shape<UserShape>) => User = defineRecord('User', {
+export const UserRecord: (init?: $Shape<UserShape>) => User = defineRecord('User', {
   username: '',
   password: '',
 })
